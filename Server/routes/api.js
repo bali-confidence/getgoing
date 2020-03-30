@@ -1,4 +1,5 @@
 const express  = require('express');
+const jwt = require('jsonwebtoken');
 const router = express.Router();
 const User = require('../models/user');
 const mongoose = require('mongoose');
@@ -27,25 +28,29 @@ router.post('/register', (req, res) => {
         if(error){
             console.log(error);
         }else {
-           res.status(200).send(registeredUser);
+            let payload = { subject: registeredUser._id }
+            let token = jwt.sign(payload, 'secretKey')
+           res.status(200).send({token});
         }
     })
 });
 
 router.post('/login', (req, res) => {
-    let userData = req.body
+    let userData = req.body;
 
     User.findOne({email: userData.email}, (error, user) => {
         if (error) {
-            console.log(error)
+            console.log(error);
         } else {
             if(!user){
-                res.status(401).send('Invalid email')
+                res.status(401).send('Invalid email');
             } else{
                 if(user.password !== userData.password){
                     res.status(401).send('Invalid password')
                 } else {
-                    res.status(200).send(user)
+                    let payload = { subject: user._id };
+                    let token = jwt.sign(payload, 'secretKey');
+                    res.status(200).send({token});
                 }
             }
         }
@@ -56,19 +61,19 @@ router.get('/events', (req, res) => {
     let events = [
         {
             "_id": "1",
-            "Trip Name": "Wedding in Bali",
+            "TripName": "Wedding in Bali",
             "description": "Aloh is getting married to Carol. This is going to be epic",
             "date": "2020-12-26"
         },
         {
             "_id": "2",
-            "Trip Name": "Wedding in Bali",
+            "TripName": "Wedding in Bali",
             "description": "Aloh is getting married to Carol. This is going to be epic",
             "date": "2020-12-26"
         },
         {
             "_id": "1",
-            "Trip Name": "Wedding in Bali",
+            "TripName": "Wedding in Bali",
             "description": "Aloh is getting married to Carol. This is going to be epic",
             "date": "2020-12-26"
         }
@@ -80,19 +85,19 @@ router.get('/special', (req, res) => {
     let events = [
         {
             "_id": "1",
-            "Trip Name": "Wedding in Bali",
+            "TripName": "Wedding in Bali",
             "description": "Aloh is getting married to Carol. This is going to be epic",
             "date": "2020-12-26"
         },
         {
             "_id": "2",
-            "Trip Name": "Wedding in Bali",
+            "TripName": "Wedding in cambeh",
             "description": "Aloh is getting married to Carol. This is going to be epic",
             "date": "2020-12-26"
         },
         {
             "_id": "1",
-            "Trip Name": "Wedding in Bali",
+            "TripName": "Wedding in France",
             "description": "Aloh is getting married to Carol. This is going to be epic",
             "date": "2020-12-26"
         }
