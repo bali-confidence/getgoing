@@ -95,7 +95,7 @@ router.get('/events', (req, res) => {
     res.json(events)
 })
 
-router.get('/special',verifyToken, (req, res) => {
+router.get('/special', verifyToken, (req, res) => {
     let events = [
         {
             "_id": "1",
