@@ -1,4 +1,4 @@
-<div class="row mt-5">
+<!-- <div class="row mt-5">
     <div class="col-md-4 mb-3" *ngFor="let event of events">
         <div class="card text-center">
             <div class="card-body">
@@ -10,4 +10,42 @@
             </div>
         </div>
     </div>
+</div> -->
+
+<div class="row mt-5">
+    <div class="person-list">
+        <div class="card-body" 
+        cdkDropList
+        #userList="cdkDropList"
+        [cdkDropListData]="users"
+        [cdkDropListConnectedTo]="[tripList]"
+        (cdkDropListDropped)="onDrop($event)"
+        >
+            <div *ngFor="let person of users" cdkDrag>
+                <h5 class="card-title">{{person.name}}</h5>
+                <p class="card-text">{{person.time}}</p>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card text-center">
+            <div class="card-body"
+            cdkDropList
+            #tripList="cdkDropList"
+            [cdkDropListData]="trips"
+            [cdkDropListConnectedTo]="[userList]"
+            (cdkDropListDropped)="onDrop($event)"
+            >
+                <div *ngFor="let trip of trips" cdkDrag>
+                    <h5 class="card-title">{{trip.location}}</h5>
+                    <p class="card-text">{{trip.description}}</p>
+                </div>
+            </div>
+            <!-- <div class="card-footer text-muted">
+                {{trip.date | date: 'shortDate'}}
+            </div> -->
+        </div>
+    </div>
+
 </div>

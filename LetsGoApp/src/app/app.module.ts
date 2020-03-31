@@ -11,6 +11,7 @@ import { SpecialEventsComponent } from './special-events/special-events.componen
 import { AuthService } from './auth.service';
 import {EventService} from './event.service';
 import { AuthGuard } from './auth.guard';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AuthGuard } from './auth.guard';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    DragDropModule
   ],
   providers: [AuthService, AuthGuard, EventService],
   bootstrap: [AppComponent]
