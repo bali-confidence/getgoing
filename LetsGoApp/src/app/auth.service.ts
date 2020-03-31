@@ -25,6 +25,7 @@ export class AuthService {
   }
 
   logoutUser() {
+    console.log('is this getting ran ');
     localStorage.removeItem('token')
     this._router.navigate(['/events'])
   }
