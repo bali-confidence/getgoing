@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EventService } from '../event.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-special-events',
@@ -9,13 +11,20 @@ import { EventService } from '../event.service';
 export class SpecialEventsComponent implements OnInit {
 
   specialEvents = []
-  constructor(private _eventSerivice: EventService) { }
+  constructor(private _eventSerivice: EventService,
+              private _router: Router) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this._eventSerivice.getSpecialEvents()
     .subscribe(
       res => this.specialEvents = res,
-      err => console.log(err)
+      err => {
+        if (err instanceof HttpErrorResponse) {
+          if (err.status === 401) {
+            this._router.navigate(['/login'])
+          }
+        }
+      }
     )
   }
 
