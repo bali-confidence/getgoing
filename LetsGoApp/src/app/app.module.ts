@@ -13,6 +13,8 @@ import {EventService} from './event.service';
 import { AuthGuard } from './auth.guard';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { TokenInterceptorService } from './token-interceptor.service';
+import { ChatService } from './chat.service';
+import { WebsocketService } from './web-socket.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,7 @@ import { TokenInterceptorService } from './token-interceptor.service';
     HttpClientModule,
     DragDropModule
   ],
-  providers: [AuthService, AuthGuard, EventService, 
+  providers: [AuthService, AuthGuard, EventService, ChatService, WebsocketService,
   {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,

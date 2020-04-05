@@ -1,5 +1,5 @@
 {
-  "name": "Server",
+  "name": "server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -17,6 +17,7 @@
     "http": "0.0.1-security",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.6",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "socket.io": "^2.3.0"
   }
 }

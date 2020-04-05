@@ -30,7 +30,7 @@ function verifyToken(req, res, next) {
 }
 
 router.get('/', (req, res) => {
-    res.send('From API route');
+    // res.send('From API route');
 });
 
 router.post('/register', (req, res) => {
